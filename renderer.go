@@ -6,6 +6,7 @@ import (
 	"io"
 	"reflect"
 	"strings"
+	"unicode"
 
 	"github.com/olekukonko/tablewriter"
 	"gopkg.in/yaml.v3"
@@ -223,7 +224,7 @@ func renderHumanValue(value any) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	str = strings.TrimSpace(str)
+	str = strings.TrimRightFunc(str, unicode.IsSpace)
 	if strings.Contains(str, "\n") {
 		str = str + "\n"
 	}

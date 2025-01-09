@@ -95,6 +95,19 @@ func TestStruct(t *testing.T) {
 	AssertRender(t, D{42, true}, lines(
 		"A : 42",
 	))
+
+	type E struct {
+		B    int
+		Cdef string
+	}
+	type F struct {
+		A E
+	}
+	AssertRender(t, F{E{42, "hello"}}, lines(
+		"A :    B : 42   ",
+		"    Cdef : hello",
+		"                ",
+	))
 }
 
 func TestSlice(t *testing.T) {
